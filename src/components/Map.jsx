@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef } from "react";
 import {
   GoogleMap,
   useLoadScript,
@@ -30,11 +30,12 @@ export default function Map() {
     libraries,
   });
 
-
   const mapRef = useRef();
   const onMapLoad = React.useCallback((map) => {
     mapRef.current = map;
   }, []);
+
+  
 
   const panTo = React.useCallback(({ lat, lng }) => {
     mapRef.current.panTo({ lat, lng });
@@ -43,7 +44,7 @@ export default function Map() {
 
   if (!isLoaded) return <div>Loading...</div>;
   return (
-    <div>
+    <div className="input-container">
       <Search panTo={panTo} />
  
 
@@ -73,6 +74,8 @@ function Search({ panTo }) {
     },
   });
 
+
+
   return (
     <div className="search">
       <Combobox
@@ -82,7 +85,7 @@ function Search({ panTo }) {
           try {
             const result = await getGeocode({ address });
             const { lat, lng } = await getLatLng(result[0]);
-            panTo({ lat, lng });
+            panTo({ lat, lng }); 
             console.log(lat,lng)
           } catch (err) {
             console.log(err);
@@ -109,3 +112,4 @@ function Search({ panTo }) {
     </div>
   );
 }
+

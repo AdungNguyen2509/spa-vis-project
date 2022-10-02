@@ -1,18 +1,21 @@
 import React from "react";
 
+
+
 const Input = (props) => {
   return (
-    <div>
+    <div className="input-container">
       <label>
-        {props.text}
+        {props.text}</label>
         <input
           type={props.type}
           name={props.name}
           value={props.value}
           placeholder={props.placeholder}
           onChange={props.onChange}
+          min= {props.min} 
+          max= {props.max}
         />
-      </label>
     </div>
   );
 };
